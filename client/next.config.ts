@@ -14,7 +14,14 @@ const nextConfig: NextConfig = {
           hostname: "*.amazonaws.com",
           port: "",
           pathname: "/**",
-        }
+        },
+        {
+          protocol: "https",
+          hostname: "*.amazonaws.com",
+          port: "",
+          pathname: '/**',
+
+        },
       ],
     },
 };
