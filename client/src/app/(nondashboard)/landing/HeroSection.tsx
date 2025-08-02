@@ -9,8 +9,7 @@ import { useRouter } from 'next/navigation';
 import { setFilters } from '@/state';
 
 const HeroSection = () => {
-
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
 
@@ -32,12 +31,12 @@ const HeroSection = () => {
         dispatch(
           setFilters({
             location: trimmedQuery,
-            coordinates: [lat, lng],
+            coordinates: [lng, lat],
           })
         );
         const params = new URLSearchParams({
           location: trimmedQuery,
-          lat: lat.toString(),
+          lat: lat,
           lng: lng,
         });
         router.push(`/search?${params.toString()}`);
@@ -46,10 +45,7 @@ const HeroSection = () => {
       console.error("error search location:", error);
     }
   };
-
-
-
-  return (
+return (
     
     <div className='relative h-screen'>
 
@@ -73,23 +69,11 @@ const HeroSection = () => {
             
            
          <h1 className='text-7xl sm:text-5xl font-bold text-white mb-4'>
-         {/* <TextRevealCard
-          text= " Begin your journey home."
-          revealText="Discover Rentals Now!" 
-          />  */}
+         
          Start you journey to finding the perfect place to call home
 
             </h1>
-
-
-           
-
-             
-
-        
-          
-
-            <p className='text-xl text-white mb-8 '>
+              <p className='text-xl text-white mb-8 '>
                 Explore our wide range of rental properties tailored to fit your lifestyle and needs! 
             </p>
             <div className='flex justify-center '>

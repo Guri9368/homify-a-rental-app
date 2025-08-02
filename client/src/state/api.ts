@@ -3,7 +3,7 @@ import {
   Application,
   Lease,
   Manager,
-  Payment,
+  Payment, 
   Property,
   Tenant,
 } from "@/types/prismaTypes";
@@ -15,6 +15,7 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL,
     prepareHeaders: async (headers) => {
+      //token generated here 
       const session = await fetchAuthSession();
       const { idToken } = session.tokens ?? {};
       if (idToken) {
@@ -97,7 +98,7 @@ export const api = createApi({
           longitude: filters.coordinates?.[0],
         });
 
-        return { url: "properties", params };
+        return { url: "properties", params };  
       },
       providesTags: (result) =>
         result

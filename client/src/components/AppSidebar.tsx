@@ -1,5 +1,6 @@
+"use client";
+
 import { usePathname } from "next/navigation";
-import React from "react";
 import {
   Sidebar,
   SidebarContent,
@@ -22,6 +23,10 @@ import { NAVBAR_HEIGHT } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
+interface AppSidebarProps {
+  userType: "manager" | "tenant";
+}
+
 const AppSidebar = ({ userType }: AppSidebarProps) => {
   const pathname = usePathname();
   const { toggleSidebar, open } = useSidebar();
@@ -30,20 +35,12 @@ const AppSidebar = ({ userType }: AppSidebarProps) => {
     userType === "manager"
       ? [
           { icon: Building, label: "Properties", href: "/managers/properties" },
-          {
-            icon: FileText,
-            label: "Applications",
-            href: "/managers/applications",
-          },
+          { icon: FileText, label: "Applications", href: "/managers/applications" },
           { icon: Settings, label: "Settings", href: "/managers/settings" },
         ]
       : [
           { icon: Heart, label: "Favorites", href: "/tenants/favorites" },
-          {
-            icon: FileText,
-            label: "Applications",
-            href: "/tenants/applications",
-          },
+          { icon: FileText, label: "Applications", href: "/tenants/applications" },
           { icon: Home, label: "Residences", href: "/tenants/residences" },
           { icon: Settings, label: "Settings", href: "/tenants/settings" },
         ];
@@ -51,7 +48,10 @@ const AppSidebar = ({ userType }: AppSidebarProps) => {
   return (
     <Sidebar
       collapsible="icon"
-      className="fixed left-0 bg-white shadow-lg"
+      className={cn(
+        "fixed left-0 z-50 bg-white shadow-md transition-all duration-300",
+        open ? "w-[240px]" : "w-[80px]"
+      )}
       style={{
         top: `${NAVBAR_HEIGHT}px`,
         height: `calc(100vh - ${NAVBAR_HEIGHT}px)`,
@@ -73,7 +73,7 @@ const AppSidebar = ({ userType }: AppSidebarProps) => {
                   </h1>
                   <button
                     className="hover:bg-gray-100 p-2 rounded-md"
-                    onClick={() => toggleSidebar()}
+                    onClick={toggleSidebar}
                   >
                     <X className="h-6 w-6 text-gray-600" />
                   </button>
@@ -81,7 +81,7 @@ const AppSidebar = ({ userType }: AppSidebarProps) => {
               ) : (
                 <button
                   className="hover:bg-gray-100 p-2 rounded-md"
-                  onClick={() => toggleSidebar()}
+                  onClick={toggleSidebar}
                 >
                   <Menu className="h-6 w-6 text-gray-600" />
                 </button>
@@ -101,7 +101,7 @@ const AppSidebar = ({ userType }: AppSidebarProps) => {
                 <SidebarMenuButton
                   asChild
                   className={cn(
-                    "flex items-center px-7 py-7",
+                    "flex items-center px-7 py-7 transition-all duration-200",
                     isActive
                       ? "bg-gray-100"
                       : "text-gray-600 hover:bg-gray-100",
@@ -115,13 +115,15 @@ const AppSidebar = ({ userType }: AppSidebarProps) => {
                           isActive ? "text-blue-600" : "text-gray-600"
                         }`}
                       />
-                      <span
-                        className={`font-medium ${
-                          isActive ? "text-blue-600" : "text-gray-600"
-                        }`}
-                      >
-                        {link.label}
-                      </span>
+                      {open && (
+                        <span
+                          className={`font-medium ${
+                            isActive ? "text-blue-600" : "text-gray-600"
+                          }`}
+                        >
+                          {link.label}
+                        </span>
+                      )}
                     </div>
                   </Link>
                 </SidebarMenuButton>

@@ -1,4 +1,4 @@
-import Link from "next/link";
+  import Link from "next/link";
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -16,7 +16,7 @@ const FooterSection = () => {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4">
             <Link href="/" className="text-xl font-bold" scroll={false}>
-              RENTIFUL
+              HOMIFY
             </Link>
           </div>
           <nav className="mb-4">

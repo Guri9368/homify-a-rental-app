@@ -30,11 +30,11 @@ const components = {
       <View className="mt-4 mb-7">
         <Heading level={3} className="!text-2xl !font-bold">
           HOM
-          <span className="text-secondary-500 font-light hover:!text-primary-300">
+          <span className="text-secondary-500 font-bold hover:!text-primary-300">
             IFY
           </span>
         </Heading>
-        <p className="text-muted-foreground mt-2">
+        <p className="text-muted-foreground mt-2 text-1.8xl">
           <span className="font-bold">Welcome!</span> Please sign in to continue
         </p>
       </View>
